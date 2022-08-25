@@ -69,7 +69,7 @@ def transform_to_text(df_path, min_messages: int = 10, max_messages: int = 10000
 @click.option(
     "--output_path",
     type=Path,
-    default=Path(f"./your_text_messages_{datetime.now().strftime('%Y_%M_%d_%H_%M')}.txt"),
+    default=Path(f"./your_text_messages_{datetime.now().strftime('%Y_%m_%d_%H_%M')}.txt"),
 )
 def main(chatistics_export_path: Path, output_path: Path):
     if not chatistics_export_path:
