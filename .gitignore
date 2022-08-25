@@ -133,3 +133,6 @@ dmypy.json
 
 # Chatistics
 Chatistics/
+
+# Conversation data
+data/
