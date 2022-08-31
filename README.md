@@ -3,11 +3,13 @@ Create a Digital Avatar by fine-tuning the Transformer language model on convers
 
 Steps:
 
-1. `git clone git@github.com:MasterScrat/Chatistics.git`
+1. Create `data` dir and move there all .zip files with Facebook data
 
-2. `pip install -r requirements.txt`
+2. `git clone git@github.com:MasterScrat/Chatistics.git`
 
-3. ```bash
+3. `pip install -r requirements.txt`
+
+4. ```bash
    python prepare_data_for_chatistics.py
    cd Chatistics
    python parse.py messenger --max-exported-messages=1000000000
