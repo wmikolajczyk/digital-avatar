@@ -137,3 +137,6 @@ Chatistics/
 # Conversation data
 data/
 extracted/
+
+# Models
+models/
