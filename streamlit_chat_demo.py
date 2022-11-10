@@ -4,7 +4,7 @@ import streamlit as st
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODEL_NAME = "flax-community/papuGaPT2"
-MODEL_DIR = Path("./models/checkpoint-7000-best-to-10000")
+MODEL_DIR = Path("./models/checkpoint-6000-160-6per")  # Path("./models/checkpoint-7000-best-to-10000")
 
 CONTEXT_SIZE = 200
 SPEAKER_1_TAG = "<speaker1>"
@@ -27,10 +27,10 @@ def get_tokenizer(model_name: str = MODEL_NAME):
 
 
 def make_pred(message: str, tokenizer, model):
-    model_input = f"{message}{SPEAKER_1_TAG}"
+    model_input = f"{message}"  #{SPEAKER_1_TAG}"
     input_ids = tokenizer.encode(model_input, return_tensors="pt")
     outputs = model.generate(
-        input_ids, do_sample=True, max_length=CONTEXT_SIZE + 100, top_k=50, top_p=0.95
+        input_ids, do_sample=True, max_length=CONTEXT_SIZE + 200, top_k=20, top_p=0.96,  #top_k=50, top_p=0.95
     )
     response = tokenizer.decode(outputs[0])
     response = response.replace(message, "", 1)
@@ -41,7 +41,8 @@ def make_pred(message: str, tokenizer, model):
 
 
 def get_message_with_context(history):
-    return "".join(history)[-CONTEXT_SIZE:]
+    # return "".join(history)[-CONTEXT_SIZE:]
+    return history[-1]
 
 
 def main():
@@ -56,7 +57,7 @@ def main():
 
     message = st.text_input(f"Type a message (you are {SPEAKER_2_TAG}):")
     if message:
-        message_with_speaker = f"{SPEAKER_2_TAG} {message}"
+        message_with_speaker = f" {SPEAKER_2_TAG}{message}"
         st.session_state["history"].append(message_with_speaker)
 
         message_with_context = get_message_with_context(st.session_state["history"])
